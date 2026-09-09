@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Виртуальный шеф - Рецепты и советы по кулинарии</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>🍳 Виртуальный шеф</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#recipes">Рецепты</a></li>
+                    <li><a href="#tips">Советы</a></li>
+                    <li><a href="#calculator">Калькулятор</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Секция приветствия -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2>Добро пожаловать на кухню!</h2>
+                <p>Найдите вкусные рецепты и полезные советы от вашего виртуального шефа</p>
+                <button class="btn-primary" onclick="scrollToRecipes()">Начать готовить</button>
+            </div>
+        </section>
+
+        <!-- Секция поиска рецептов -->
+        <section id="recipes" class="recipes-section">
+            <div class="container">
+                <h2>Наши рецепты</h2>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Поиск рецепта..." onkeyup="filterRecipes()">
+                    <select id="categoryFilter" onchange="filterRecipes()">
+                        <option value="">Все категории</option>
+                        <option value="завтрак">Завтрак</option>
+                        <option value="обед">Обед</option>
+                        <option value="ужин">Ужин</option>
+                        <option value="десерт">Десерт</option>
+                    </select>
+                </div>
+
+                <div class="recipes-grid" id="recipesGrid">
+                    <div class="recipe-card" data-category="завтрак">
+                        <img src="https://via.placeholder.com/300x200?text=Омлет" alt="Омлет">
+                        <h3>Омлет с беконом</h3>
+                        <p class="category">Завтрак</p>
+                        <p class="time">⏱️ 15 минут</p>
+                        <p class="description">Классический омлет с хрустящим беконом и сыром</p>
+                        <button class="btn-secondary" onclick="showRecipeDetails('Омлет с беконом')">Узнать рецепт</button>
+                    </div>
+
+                    <div class="recipe-card" data-category="обед">
+                        <img src="https://via.placeholder.com/300x200?text=Паста" alt="Паста">
+                        <h3>Паста Карбонара</h3>
+                        <p class="category">Обед</p>
+                        <p class="time">⏱️ 25 минут</p>
+                        <p class="description">Аутентичная итальянская паста с беконом и сливочным соусом</p>
+                        <button class="btn-secondary" onclick="showRecipeDetails('Паста Карбонара')">Узнать рецепт</button>
+                    </div>
+
+                    <div class="recipe-card" data-category="ужин">
+                        <img src="https://via.placeholder.com/300x200?text=Стейк" alt="Стейк">
+                        <h3>Стейк с овощами</h3>
+                        <p class="category">Ужин</p>
+                        <p class="time">⏱️ 30 минут</p>
+                        <p class="description">Сочный стейк с гарниром из свежих овощей</p>
+                        <button class="btn-secondary" onclick="showRecipeDetails('Стейк с овощами')">Узнать рецепт</button>
+                    </div>
+
+                    <div class="recipe-card" data-category="десерт">
+                        <img src="https://via.placeholder.com/300x200?text=Тирамису" alt="Тирамису">
+                        <h3>Тирамису</h3>
+                        <p class="category">Десерт</p>
+                        <p class="time">⏱️ 20 минут</p>
+                        <p class="description">Нежный итальянский десерт с маскарпоне и какао</p>
+                        <button class="btn-secondary" onclick="showRecipeDetails('Тирамису')">Узнать рецепт</button>
+                    </div>
+
+                    <div class="recipe-card" data-category="завтрак">
+                        <img src="https://via.placeholder.com/300x200?text=Блины" alt="Блины">
+                        <h3>Блины со сметаной</h3>
+                        <p class="category">Завтрак</p>
+                        <p class="time">⏱️ 30 минут</p>
+                        <p class="description">Тонкие русские блины с клубникой и сметаной</p>
+                        <button class="btn-secondary" onclick="showRecipeDetails('Блины со сметаной')">Узнать рецепт</button>
+                    </div>
+
+                    <div class="recipe-card" data-category="обед">
+                        <img src="https://via.placeholder.com/300x200?text=Борщ" alt="Борщ">
+                        <h3>Украинский борщ</h3>
+                        <p class="category">Обед</p>
+                        <p class="time">⏱️ 45 минут</p>
+                        <p class="description">Традиционный борщ с говядиной и сметаной</p>
+                        <button class="btn-secondary" onclick="showRecipeDetails('Украинский борщ')">Узнать рецепт</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция советов -->
+        <section id="tips" class="tips-section">
+            <div class="container">
+                <h2>Полезные кулинарные советы</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">🔪</div>
+                        <h3>Заточка ножей</h3>
+                        <p>Остро заточенный нож - главный помощник на кухне. Затачивайте ножи регулярно для безопасности и удобства.</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <div class="tip-icon">🧂</div>
+                        <h3>Правильная соль</h3>
+                        <p>Солите блюдо в конце приготовления. Это помогает лучше ощутить естественный вкус ингредиентов.</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <div class="tip-icon">🍳</div>
+                        <h3>Температура масла</h3>
+                        <p>Разные масла имеют разные точки дымления. Выбирайте масло в зависимости от температуры приготовления.</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <div class="tip-icon">⏰</div>
+                        <h3>Время отдыха мяса</h3>
+                        <p>Дайте мясу отдохнуть 5-10 минут после готовки. Так оно останется сочным и мягким.</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <div class="tip-icon">🧅</div>
+                        <h3>Правильная нарезка</h3>
+                        <p>Нарезайте ингредиенты одинакового размера для равномерного приготовления блюда.</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <div class="tip-icon">❄️</div>
+                        <h3>Хранение ингредиентов</h3>
+                        <p>Храните продукты в правильной температуре. Это влияет на вкус и качество готового блюда.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция калькулятора -->
+        <section id="calculator" class="calculator-section">
+            <div class="container">
+                <h2>Калькулятор ингредиентов</h2>
+                <div class="calculator-box">
+                    <div class="calculator-form">
+                        <label for="servings">Количество порций:</label>
+                        <div class="input-group">
+                            <button onclick="changeServings(-1)">-</button>
+                            <input type="number" id="servings" value="4" min="1" max="20">
+                            <button onclick="changeServings(1)">+</button>
+                        </div>
+                    </div>
+                    <div class="calculator-result" id="calculatorResult">
+                        <p>Выберите рецепт для расчета ингредиентов</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Модальное окно для рецепта -->
+        <div id="recipeModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeRecipeModal()">&times;</span>
+                <div id="recipeDetails"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Секция контактов -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Свяжитесь с нами</h2>
+            <div class="contact-form">
+                <form onsubmit="submitForm(event)">
+                    <input type="text" placeholder="Ваше имя" required>
+                    <input type="email" placeholder="Ваша почта" required>
+                    <textarea placeholder="Ваше сообщение" rows="5" required></textarea>
+                    <button type="submit" class="btn-primary">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Виртуальный шеф. Все права защищены.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
